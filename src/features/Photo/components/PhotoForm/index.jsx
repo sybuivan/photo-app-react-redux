@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button, FormGroup, Input, Label } from "reactstrap";
+import { Button, FormGroup, Input, Label, Spinner } from "reactstrap";
 import { PHOTO_CATEGORY_OPTIONS } from "../../../../constants/global";
 import Images from "../../../../constants/images";
 import { FastField, Form, Formik } from "formik";
@@ -30,11 +30,11 @@ function PhotoForm(props) {
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={(values) => console.log("Form submit", values)}
+      onSubmit={props.onSubmit}
       validationSchema={validationSchema}
     >
       {(formikProps) => {
-        const {values, errors, touched} = formikProps
+        const {values, errors, touched, isSubmitting} = formikProps
         console.log({values, errors, touched})
         return (
           <Form>
@@ -64,6 +64,7 @@ function PhotoForm(props) {
 
             <FormGroup>
               <Button type="submit" outline color="primary">
+                {isSubmitting && <Spinner size="sm"/>}
                 Add Photo
               </Button>
             </FormGroup>
@@ -74,6 +75,8 @@ function PhotoForm(props) {
   );
 }
 
-PhotoForm.propTypes = {};
+PhotoForm.propTypes = {
+  onSubmit: PropTypes.func
+};
 
 export default PhotoForm;

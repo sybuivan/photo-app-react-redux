@@ -4,9 +4,13 @@ import Banner from "../../../../components/Banner";
 import Images from "../../../../constants/images";
 import { Link } from "react-router-dom";
 import { Container } from "reactstrap";
+import { useSelector } from "react-redux";
 
 function MainPage(props) {
-  console.log(Images);
+  
+  const photos = useSelector(state => state.photos)
+  console.log('List photo: ', photos);
+
   return (
     <div>
       <Banner title="Your awesome a photos" backgroundUrl={Images.DIGTAL_BK} />
