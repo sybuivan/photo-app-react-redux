@@ -10,15 +10,14 @@ import RandomPhotoField from "../../../../custom-fields/RandomPhotoField";
 import * as Yup from 'yup'
 
 function PhotoForm(props) {
-  const initialValues = {
-    title: '',
-    category: null,
-    photo: ''
-  }
+  const {formValues, isAddPhoto} = props;
+
+  const initialValues = formValues
+  console.log('form value',initialValues);
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required('This field is required'),
-    category: Yup.number().required('This field is required').nullable(),
+    categoryId: Yup.number().required('This field is required').nullable(),
 
     photo: Yup.string().when('category', {
       is: 1,
@@ -47,7 +46,7 @@ function PhotoForm(props) {
             />
 
             <FastField 
-              name="category"
+              name="categoryId"
               component={SelectFiled}
 
               placeholder="What your photo category?"
@@ -63,9 +62,9 @@ function PhotoForm(props) {
             />
 
             <FormGroup>
-              <Button type="submit" outline color="primary">
+              <Button type="submit" outline color={isAddPhoto ? 'primary' : 'success'}>
                 {isSubmitting && <Spinner size="sm"/>}
-                Add Photo
+                {isAddPhoto ? "Add photo" : "Update photo"}
               </Button>
             </FormGroup>
           </Form>

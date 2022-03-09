@@ -14,6 +14,7 @@ function SelectFiled(props) {
 
   const selectedOption = options.find(option => option.value === value);
 
+  console.log('Value select', selectedOption);
   const handleSelectedOptionChange = (selectedOption) => {
    const selectedValue = selectedOption ? selectedOption.value : selectedOption;
 
@@ -29,8 +30,10 @@ function SelectFiled(props) {
     <FormGroup>
       {label && <Label for={name}>{label}</Label>}
       <Select
+        id={name}
         name={name}
         {...field}
+        
         value={selectedOption}
         onChange={handleSelectedOptionChange}
         placeholder={placeholder}
